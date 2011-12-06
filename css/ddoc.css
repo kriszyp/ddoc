@@ -1,0 +1,21 @@
+#toc {
+	-webkit-transition-duration: 1s;
+	-moz-transition-duration: 1s;
+	-o-transition-duration: 1s;
+	transition-duration: 1s;
+	position: fixed;
+	top: 100px;
+	left: 20px;
+	z-index: 10;
+	width: 200px;
+	background-color: #f8f8f8;
+	border: 1px solid #bbb;
+	border-radius: 4px;
+}
+#toc .dgrid-row {
+	heigth: 24px;
+}
+#toc .dgrid-cell {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
