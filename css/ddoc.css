@@ -11,6 +11,13 @@
 	background-color: #f8f8f8;
 	border: 1px solid #bbb;
 	border-radius: 4px;
+	height: auto;
+	cursor: pointer;
+}
+#toc .dgrid-scroller {
+	max-height: 30em;
+	overflow: auto;
+	position: relative;
 }
 #toc .dgrid-row {
 	heigth: 24px;
