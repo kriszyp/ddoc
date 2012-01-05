@@ -1,4 +1,4 @@
-define(['dgrid/OnDemandGrid', 'dgrid/Tree', 'dgrid/Selection', 'put-selector/put', 'dojo/store/Memory', 'dojo/_base/declare', 'dojo/domReady!'], function(Grid, Tree, Selection, put, Memory, declare){
+define(['dgrid/OnDemandGrid', 'dgrid/Tree', 'dgrid/Selection', 'put-selector/put', 'dojo/store/Memory', 'dojo/_base/declare', 'dojox/fx/scroll', 'dojo/query', 'dojo/domReady!'], function(Grid, Tree, Selection, put, Memory, declare, scroll){
 	var elements = document.getElementById("content").getElementsByTagName("*");
 	var root = {children:[]}, current;
 	var nextId = 1;
@@ -13,11 +13,11 @@ define(['dgrid/OnDemandGrid', 'dgrid/Tree', 'dgrid/Selection', 'put-selector/put
 			}
 			current = stack[stack.length - 1];
 			while(stack.length < depth + 1){
-				current.children.push(current = {id:nextId, children:[]});
+				current.children.push(current = {id:nextId, element: element, children:[]});
 				stack.push(current);
 			}
 			current.description = element.innerHTML;
-			put(element, '-a[name=$]', nextId); 
+			put(element, '-a[name=$]', nextId);
 			i++; // skip ahead because put creates a new element
 			nextId++;
 		}
@@ -37,6 +37,9 @@ define(['dgrid/OnDemandGrid', 'dgrid/Tree', 'dgrid/Selection', 'put-selector/put
 		})
 	}, "toc");
 	grid.on("dgrid-select", function(event){
-		location.hash = event.row.data.id;
+		scroll({node:event.row.data.element, win: window}).play();
 	});
+	grid.on(".dgrid-header:click", function(event){
+		scroll({node:document.body, win: window}).play();
+	})
 });
